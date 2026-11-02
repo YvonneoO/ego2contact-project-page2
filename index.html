@@ -54,6 +54,17 @@
 			.bar-row .tr{position:relative;height:9px;background:#f7f7f7;border-radius:5px}
 			.bar-row .g,.bar-row .p{position:absolute;left:0;height:4.5px;border-radius:3px}
 			.bar-row .g{top:0;background:#8c6a2b} .bar-row .p{top:4.5px;background:#0b6e65}
+			/* poster cards that open a clip in a lightbox */
+			.pv{position:relative;display:block;cursor:zoom-in;border-bottom:none}
+			.pv img{width:100%;display:block;background:#000;aspect-ratio:1050/578;object-fit:cover}
+			.pv .play{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:3em;height:3em;border-radius:50%;background:rgba(0,0,0,.55);color:#fff;display:flex;align-items:center;justify-content:center;padding-left:.2em}
+			.lb{position:fixed;inset:0;z-index:100;background:rgba(0,0,0,.82);display:flex;align-items:center;justify-content:center;padding:2em}
+			.lb[hidden]{display:none}
+			.lb .in{position:relative;width:min(1100px,94vw);background:#fff;border-radius:.35em;padding:.8em}
+			.lb video{width:100%;display:block;background:#000}
+			.lb .bar{display:flex;justify-content:space-between;align-items:center;gap:1em;padding:.6em .3em 0;color:#787878;font-size:.9em}
+			.lb .bar span{color:#a2a2a2;font-size:.9em}
+			.lb .x{border:0;background:#efefef;border-radius:50%;width:2em;height:2em;cursor:pointer;color:#787878;font-size:1em}
 		</style>
 	</head>
 	<body id="top">
@@ -98,51 +109,87 @@
 						</p>
 
 						<hr style="margin-top: 0em;">
-						<h3>Highlights</h3>
+						<h3><a id="video">Overview Video</a></h3>
+						<p>Ego2Contact in 30 seconds: a tactile predictor learned from human egocentric video is adapted to robot hands and supplies touch for policy learning in simulation and on a real robot (no sound, on-screen captions).</p>
+						<video controls playsinline preload="metadata" src="assets/video/overview.mp4" poster="assets/poster/overview.webp" style="width: 97.6%; margin-left: 0%; margin-bottom: 2em;"></video>
+
+						<hr style="margin-top: 0em;">
+
+						<h3><a id="human">Predicting Touch from Human Video</a></h3>
+						<p>
+						The predictor fuses temporal scene context with hand-local visual features to infer bimanual pressure fields from egocentric RGB video, and outperforms the TouchAnything baseline on seen and unseen objects of EgoTouch.
+						<br>Click a clip to enlarge it. Each clip shows the RGB input on the left and the 21×21 pressure grids of both hands on the right: ground truth on top, prediction below.
+						</p>
 						<div class="box alt" style="margin-bottom: 1em;">
 							<div class="row 50% uniform" style="width: 100%;">
-								<div class="2u" style="font-size: 0.9em; line-height: 1.5em; text-align: center; width: 66%">
-									<span class="image fit" style="margin-bottom: 1.5em;">
-										<video controls playsinline preload="metadata" src="assets/video/overview.mp4" poster="assets/poster/overview.webp" style="width: 100%; margin-right: 5%;"></video>
-									</span>
-									Ego2Contact in 30 seconds: a tactile predictor learned from human egocentric video is adapted to robot hands and supplies touch for policy learning in simulation and on a real robot.
-								</div>
-								<div class="2u" style="font-size: 0.9em; line-height: 1.5em; text-align: center; width: 33%">
+								<div class="2u" style="font-size: 1em; line-height: 1.5em; text-align: center; width: 33%">
 									<span class="image fit" style="margin-bottom: 0.5em;">
-										<video controls muted playsinline preload="none" data-src="assets/video/human_twist_bottle_cap.mp4" data-poster="assets/poster/human_twist_bottle_cap.webp" style="width: 100%; margin-right: 5%;"></video>
+										<a class="pv" data-video="assets/video/human_twist_bottle_cap.mp4" data-poster="assets/poster/human_twist_bottle_cap.webp" data-title="Twist bottle cap"><img data-src="assets/poster/human_twist_bottle_cap.webp" alt="Twist bottle cap"><span class="play">▶</span></a>
 									</span>
-									Bimanual pressure fields predicted from an egocentric video of a human twisting a bottle cap (ground truth above, prediction below).
+									Twist bottle cap
+								</div>
+								<div class="2u" style="font-size: 1em; line-height: 1.5em; text-align: center; width: 33%">
+									<span class="image fit" style="margin-bottom: 0.5em;">
+										<a class="pv" data-video="assets/video/human_grasp_power_adapter.mp4" data-poster="assets/poster/human_grasp_power_adapter.webp" data-title="Grasp power adapter"><img data-src="assets/poster/human_grasp_power_adapter.webp" alt="Grasp power adapter"><span class="play">▶</span></a>
+									</span>
+									Grasp power adapter
+								</div>
+								<div class="2u" style="font-size: 1em; line-height: 1.5em; text-align: center; width: 33%">
+									<span class="image fit" style="margin-bottom: 0.5em;">
+										<a class="pv" data-video="assets/video/human_lift_towel.mp4" data-poster="assets/poster/human_lift_towel.webp" data-title="Lift towel"><img data-src="assets/poster/human_lift_towel.webp" alt="Lift towel"><span class="play">▶</span></a>
+									</span>
+									Lift towel
 								</div>
 							</div>
 							<div class="row 50% uniform" style="width: 100%;">
-								<div class="2u" style="font-size: 0.9em; line-height: 1.5em; text-align: center; width: 33%">
+								<div class="2u" style="font-size: 1em; line-height: 1.5em; text-align: center; width: 33%">
 									<span class="image fit" style="margin-bottom: 0.5em;">
-										<video controls muted playsinline preload="none" data-src="assets/video/robot_bottle_cap_removal.mp4" data-poster="assets/poster/robot_bottle_cap_removal.webp" style="width: 100%; margin-right: 5%;"></video>
+										<a class="pv" data-video="assets/video/human_wring_towel.mp4" data-poster="assets/poster/human_wring_towel.webp" data-title="Wring towel"><img data-src="assets/poster/human_wring_towel.webp" alt="Wring towel"><span class="play">▶</span></a>
 									</span>
-									A real dexterous hand removes a bottle cap with a policy post-trained on predicted tactile annotations.
+									Wring towel
 								</div>
-								<div class="2u" style="font-size: 0.9em; line-height: 1.5em; text-align: center; width: 33%">
+								<div class="2u" style="font-size: 1em; line-height: 1.5em; text-align: center; width: 33%">
 									<span class="image fit" style="margin-bottom: 0.5em;">
-										<video controls muted playsinline preload="none" data-src="assets/video/robot_test_tube_transfer.mp4" data-poster="assets/poster/robot_test_tube_transfer.webp" style="width: 100%; margin-right: 5%;"></video>
+										<a class="pv" data-video="assets/video/human_boil_water_with_kettle.mp4" data-poster="assets/poster/human_boil_water_with_kettle.webp" data-title="Boil water with kettle"><img data-src="assets/poster/human_boil_water_with_kettle.webp" alt="Boil water with kettle"><span class="play">▶</span></a>
 									</span>
-									Test tube transfer: predicted touch raises success from 3/10 (no tactile) to 5/10.
+									Boil water with kettle
 								</div>
-								<div class="2u" style="font-size: 0.9em; line-height: 1.5em; text-align: center; width: 33%">
+								<div class="2u" style="font-size: 1em; line-height: 1.5em; text-align: center; width: 33%">
 									<span class="image fit" style="margin-bottom: 0.5em;">
-										<video controls muted playsinline preload="none" data-src="assets/video/robot_bimanual_pouring.mp4" data-poster="assets/poster/robot_bimanual_pouring.webp" style="width: 100%; margin-right: 5%;"></video>
+										<a class="pv" data-video="assets/video/human_put_back_ping_pong_paddle.mp4" data-poster="assets/poster/human_put_back_ping_pong_paddle.webp" data-title="Put back ping-pong paddle"><img data-src="assets/poster/human_put_back_ping_pong_paddle.webp" alt="Put back ping-pong paddle"><span class="play">▶</span></a>
 									</span>
-									Bimanual pouring: both hands pick up their tubes and the right hand pours into the funnel tube held by the left.
+									Put back ping-pong paddle
 								</div>
 							</div>
 						</div>
 
 						<hr style="margin-top: 0em;">
 
-						<h3>Simulation Benchmarks</h3>
+						<h3><a id="adapt">Adapting the Predictor to Robot Hands</a></h3>
+						<p>
+						The predictor is fine-tuned on paired RGB and contact forces from simulated robot rollouts through anatomical region correspondences. Browse ground truth vs. prediction on held-out episodes of the four simulated tasks: the 21×21 canonical grid, the hand surface, and the 17 link regions consumed by the RL policy. Values are normalised per task and clipped to [0, 1].
+						</p>
+						<div class="viewer" id="viewer">
+							<div class="vctl">
+								<span><label>Task</label><span class="seg" id="simTask"></span></span>
+								<span><label>Hand</label><span class="seg" id="simHand"><button data-v="L">Left</button><button data-v="R">Right</button><button data-v="both" class="on">Both</button></span></span>
+								<span><label>View</label><span class="seg" id="simRep"><button data-v="grid">Grid</button><button data-v="hand">Hand</button><button data-v="both" class="on">Both</button></span></span>
+							</div>
+							<div class="vnav"><button class="ibtn" id="simPrev">◀</button><input type="range" id="simRange" min="0" max="0" value="0"><button class="ibtn" id="simNext">▶</button><span class="mono" id="simLab">frame –</span><span class="mono" id="simMeta" style="margin-left:auto"></span></div>
+							<div class="vtop">
+								<div class="vrgb"><img id="simRgb" alt="simulator camera frame"><div class="capx">input frame (simulator camera)</div></div>
+								<div><div class="capx" style="margin:0 0 4px">pressure (norm.)</div><div class="cbar"><i></i><div><span>1.0</span><span>0.5</span><span>0</span></div></div></div>
+								<div><div class="capx" style="margin:0 0 6px">jump to frame</div><div class="thumbs" id="simThumbs"></div></div>
+							</div>
+							<div class="vhands" id="simPanels"></div>
+						</div>
 
+						<hr style="margin-top: 0em;">
+
+						<h3><a id="sim">Simulation: Predicted Touch for Reinforcement Learning</a></h3>
 						<p>
 						Predicted touch serves as a virtual tactile sensor for PPO policies on four contact-rich dexterous tasks in Isaac Gym. Policies observe proprioception alone, or additionally online predicted or ground-truth tactile (17 pressure values and 17 contact flags per hand).
-						Predicted tactile improves success on three of the four tasks and approaches ground-truth tactile on bottle cap turning. Check out our <a href="#paper">paper</a> for further details!
+						Predicted tactile improves success on three of the four tasks and approaches ground-truth tactile on bottle cap turning.
 						</p>
 						<div class="box alt" style="margin-bottom: 1em;">
 							<div class="row 50% uniform" style="width: 100%;">
@@ -175,13 +222,51 @@
 
 						<div class="table-wrapper"><table><thead><tr><th>Task</th><th>Proprio only</th><th>+ Predicted tactile</th><th>+ GT tactile</th></tr></thead><tbody><tr><td>Pen cap removal</td><td>0.0</td><td>1.0</td><td>95.0</td></tr><tr><td>Lever sliding</td><td>84.0</td><td>88.8</td><td>98.2</td></tr><tr><td>Bottle cap turning</td><td>64.1</td><td>71.0</td><td>74.1</td></tr><tr><td>Bimanual handover</td><td>29.3</td><td>33.1</td><td>49.1</td></tr><tr><td><b>Average</b></td><td><b>44.4</b></td><td><b>48.5</b></td><td><b>79.1</b></td></tr></tbody></table></div>
 						<p>
-						Success rate (%), averaged over 4 seeds. The four task clips above are successful executions from the episodes collected for predictor adaptation.
+						Success rate (%), averaged over 4 seeds. The four task clips are successful executions from the episodes collected for predictor adaptation.
 						<br><sup>1</sup> built on Bi-DexHands&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 						<sup>2</sup> adapted from the VTDexManip simulator
 						</p>
 
 						<hr style="margin-top: 0em;">
-						<h3>Code and Data</h3>
+
+						<h3><a id="real">Real-Robot Experiments</a></h3>
+						<p>
+						A dexterous hand wearing an 880-taxel tactile glove, with a head camera and a wrist camera. Demonstrations are collected by VR teleoperation; the adapted predictor annotates them with tactile images for post-training a vision-language-action policy.
+						<br>Post-training uses no tactile, predicted tactile (ours) or measured tactile; every policy runs with the glove's measured tactile. The clips are rollouts of the policies post-trained with predicted tactile (head camera, wrist camera inset).
+						</p>
+						<div class="box alt" style="margin-bottom: 1em;">
+							<div class="row 50% uniform" style="width: 100%;">
+								<div class="2u" style="font-size: 1em; line-height: 1.5em; text-align: center; width: 25%">
+									<span class="image fit" style="margin-bottom: 0em;">
+										<video controls muted playsinline preload="none" data-src="assets/video/robot_bottle_cap_removal.mp4" data-poster="assets/poster/robot_bottle_cap_removal.webp" style="width: 100%; margin-right: 5%;"></video>
+									</span>
+									Bottle Cap Removal
+								</div>
+								<div class="2u" style="font-size: 1em; line-height: 1.5em; text-align: center; width: 25%">
+									<span class="image fit" style="margin-bottom: 0em;">
+										<video controls muted playsinline preload="none" data-src="assets/video/robot_test_tube_transfer.mp4" data-poster="assets/poster/robot_test_tube_transfer.webp" style="width: 100%; margin-right: 5%;"></video>
+									</span>
+									Test Tube Transfer
+								</div>
+								<div class="2u" style="font-size: 1em; line-height: 1.5em; text-align: center; width: 25%">
+									<span class="image fit" style="margin-bottom: 0em;">
+										<video controls muted playsinline preload="none" data-src="assets/video/robot_whiteboard_erasing.mp4" data-poster="assets/poster/robot_whiteboard_erasing.webp" style="width: 100%; margin-right: 5%;"></video>
+									</span>
+									Whiteboard Erasing
+								</div>
+								<div class="2u" style="font-size: 1em; line-height: 1.5em; text-align: center; width: 25%">
+									<span class="image fit" style="margin-bottom: 0em;">
+										<video controls muted playsinline preload="none" data-src="assets/video/robot_bimanual_pouring.mp4" data-poster="assets/poster/robot_bimanual_pouring.webp" style="width: 100%; margin-right: 5%;"></video>
+									</span>
+									Bimanual Pouring
+								</div>
+							</div>
+						</div>
+
+						<div class="table-wrapper"><table><thead><tr><th>Task</th><th>No tactile</th><th>Predicted tactile</th><th>Measured tactile</th></tr></thead><tbody><tr><td>Bottle cap removal</td><td>5/10</td><td>7/10</td><td>7/10</td></tr><tr><td>Test tube transfer</td><td>3/10</td><td>5/10</td><td>6/10</td></tr><tr><td>Whiteboard erasing</td><td>2/10</td><td>3/10</td><td>4/10</td></tr><tr><td>Bimanual pouring</td><td>1/10</td><td>3/10</td><td>5/10</td></tr><tr><td><b>Average success</b></td><td><b>27.5%</b></td><td><b>45.0%</b></td><td><b>55.0%</b></td></tr></tbody></table></div>
+
+						<hr style="margin-top: 0em;">
+						<h3>Code</h3>
 						<div class="box alt" style="margin-bottom: 1em;">
 							<div class="row 50% uniform" style="width: 100%;">
 								<div class="2u" style="font-size: 1em; line-height: 1.5em; text-align: center; width: 20%">
@@ -251,123 +336,13 @@
 						<br><sup>†</sup> Corresponding author
 
 						<hr style="margin-top: 0em;">
-
-						<h3><a id="human">Predicting Touch from Human Video</a></h3>
-						<p>
-						The predictor fuses temporal scene context with hand-local visual features to infer bimanual pressure fields from egocentric RGB video, and outperforms the TouchAnything baseline on seen and unseen objects of EgoTouch.
-						<br>Each clip shows the RGB input on the left and the 21×21 pressure grids of both hands on the right: ground truth on top, prediction below.
-						</p>
-						<div class="box alt" style="margin-bottom: 1em;">
-							<div class="row 50% uniform" style="width: 100%;">
-								<div class="2u" style="font-size: 1em; line-height: 1.5em; text-align: center; width: 33%">
-									<span class="image fit" style="margin-bottom: 0.5em;">
-										<video controls muted playsinline preload="none" data-src="assets/video/human_twist_bottle_cap.mp4" data-poster="assets/poster/human_twist_bottle_cap.webp" style="width: 100%; margin-right: 5%;"></video>
-									</span>
-									Twist bottle cap
-								</div>
-								<div class="2u" style="font-size: 1em; line-height: 1.5em; text-align: center; width: 33%">
-									<span class="image fit" style="margin-bottom: 0.5em;">
-										<video controls muted playsinline preload="none" data-src="assets/video/human_grasp_power_adapter.mp4" data-poster="assets/poster/human_grasp_power_adapter.webp" style="width: 100%; margin-right: 5%;"></video>
-									</span>
-									Grasp power adapter
-								</div>
-								<div class="2u" style="font-size: 1em; line-height: 1.5em; text-align: center; width: 33%">
-									<span class="image fit" style="margin-bottom: 0.5em;">
-										<video controls muted playsinline preload="none" data-src="assets/video/human_lift_towel.mp4" data-poster="assets/poster/human_lift_towel.webp" style="width: 100%; margin-right: 5%;"></video>
-									</span>
-									Lift towel
-								</div>
-							</div>
-							<div class="row 50% uniform" style="width: 100%;">
-								<div class="2u" style="font-size: 1em; line-height: 1.5em; text-align: center; width: 33%">
-									<span class="image fit" style="margin-bottom: 0.5em;">
-										<video controls muted playsinline preload="none" data-src="assets/video/human_wring_towel.mp4" data-poster="assets/poster/human_wring_towel.webp" style="width: 100%; margin-right: 5%;"></video>
-									</span>
-									Wring towel
-								</div>
-								<div class="2u" style="font-size: 1em; line-height: 1.5em; text-align: center; width: 33%">
-									<span class="image fit" style="margin-bottom: 0.5em;">
-										<video controls muted playsinline preload="none" data-src="assets/video/human_boil_water_with_kettle.mp4" data-poster="assets/poster/human_boil_water_with_kettle.webp" style="width: 100%; margin-right: 5%;"></video>
-									</span>
-									Boil water with kettle
-								</div>
-								<div class="2u" style="font-size: 1em; line-height: 1.5em; text-align: center; width: 33%">
-									<span class="image fit" style="margin-bottom: 0.5em;">
-										<video controls muted playsinline preload="none" data-src="assets/video/human_put_back_ping_pong_paddle.mp4" data-poster="assets/poster/human_put_back_ping_pong_paddle.webp" style="width: 100%; margin-right: 5%;"></video>
-									</span>
-									Put back ping-pong paddle
-								</div>
-							</div>
-						</div>
-
-						<hr style="margin-top: 0em;">
-
-						<h3><a id="viewer-sec">Predicted Touch on a Simulated Hand</a></h3>
-						<p>
-						The predictor is fine-tuned on paired RGB and contact forces from simulated robot rollouts through anatomical region correspondences. Browse ground truth vs. prediction on held-out episodes of the four simulated tasks: the 21×21 canonical grid, the hand surface, and the 17 link regions consumed by the RL policy. Values are normalised per task and clipped to [0, 1].
-						</p>
-						<div class="viewer" id="viewer">
-							<div class="vctl">
-								<span><label>Task</label><span class="seg" id="simTask"></span></span>
-								<span><label>Hand</label><span class="seg" id="simHand"><button data-v="L">Left</button><button data-v="R">Right</button><button data-v="both" class="on">Both</button></span></span>
-								<span><label>View</label><span class="seg" id="simRep"><button data-v="grid">Grid</button><button data-v="hand">Hand</button><button data-v="both" class="on">Both</button></span></span>
-							</div>
-							<div class="vnav"><button class="ibtn" id="simPrev">◀</button><input type="range" id="simRange" min="0" max="0" value="0"><button class="ibtn" id="simNext">▶</button><span class="mono" id="simLab">frame –</span><span class="mono" id="simMeta" style="margin-left:auto"></span></div>
-							<div class="vtop">
-								<div class="vrgb"><img id="simRgb" alt="simulator camera frame"><div class="capx">input frame (simulator camera)</div></div>
-								<div><div class="capx" style="margin:0 0 4px">pressure (norm.)</div><div class="cbar"><i></i><div><span>1.0</span><span>0.5</span><span>0</span></div></div></div>
-								<div><div class="capx" style="margin:0 0 6px">jump to frame</div><div class="thumbs" id="simThumbs"></div></div>
-							</div>
-							<div class="vhands" id="simPanels"></div>
-						</div>
-
-						<hr style="margin-top: 0em;">
-
-						<h3><a id="real">Real-World Tasks</a></h3>
-						<p>
-						A dexterous hand wearing an 880-taxel tactile glove, with a head camera and a wrist camera. Demonstrations are collected by VR teleoperation; the adapted predictor annotates them with tactile images for post-training a vision-language-action policy.
-						<br>Post-training uses no tactile, predicted tactile (ours) or measured tactile; every policy runs with the glove's measured tactile.
-						</p>
-
-						<div class="table-wrapper"><table><thead><tr><th>Task</th><th>No tactile</th><th>Predicted tactile</th><th>Measured tactile</th></tr></thead><tbody><tr><td>Bottle cap removal</td><td>5/10</td><td>7/10</td><td>7/10</td></tr><tr><td>Test tube transfer</td><td>3/10</td><td>5/10</td><td>6/10</td></tr><tr><td>Whiteboard erasing</td><td>2/10</td><td>3/10</td><td>4/10</td></tr><tr><td>Bimanual pouring</td><td>1/10</td><td>3/10</td><td>5/10</td></tr><tr><td><b>Average success</b></td><td><b>27.5%</b></td><td><b>45.0%</b></td><td><b>55.0%</b></td></tr></tbody></table></div>
-						<p>Rollouts of policies post-trained with predicted tactile (head camera, wrist camera inset):</p>
-						<div class="box alt" style="margin-bottom: 1em;">
-							<div class="row 50% uniform" style="width: 100%;">
-								<div class="2u" style="font-size: 1em; line-height: 1.5em; text-align: center; width: 50%">
-									<span class="image fit" style="margin-bottom: 0.5em;">
-										<video controls muted playsinline preload="none" data-src="assets/video/robot_bottle_cap_removal.mp4" data-poster="assets/poster/robot_bottle_cap_removal.webp" style="width: 100%;"></video>
-									</span>
-									Bottle Cap Removal
-								</div>
-								<div class="2u" style="font-size: 1em; line-height: 1.5em; text-align: center; width: 50%">
-									<span class="image fit" style="margin-bottom: 0.5em;">
-										<video controls muted playsinline preload="none" data-src="assets/video/robot_test_tube_transfer.mp4" data-poster="assets/poster/robot_test_tube_transfer.webp" style="width: 100%;"></video>
-									</span>
-									Test Tube Transfer
-								</div>
-							</div>
-							<div class="row 50% uniform" style="width: 100%;">
-								<div class="2u" style="font-size: 1em; line-height: 1.5em; text-align: center; width: 50%">
-									<span class="image fit" style="margin-bottom: 0.5em;">
-										<video controls muted playsinline preload="none" data-src="assets/video/robot_whiteboard_erasing.mp4" data-poster="assets/poster/robot_whiteboard_erasing.webp" style="width: 100%;"></video>
-									</span>
-									Whiteboard Erasing
-								</div>
-								<div class="2u" style="font-size: 1em; line-height: 1.5em; text-align: center; width: 50%">
-									<span class="image fit" style="margin-bottom: 0.5em;">
-										<video controls muted playsinline preload="none" data-src="assets/video/robot_bimanual_pouring.mp4" data-poster="assets/poster/robot_bimanual_pouring.webp" style="width: 100%;"></video>
-									</span>
-									Bimanual Pouring
-								</div>
-							</div>
-						</div>
-
-						<hr style="margin-top: 0em;">
 				        <h3>Contact</h3>
 				        <p>If you have any questions, please feel free to contact Zhiwen Fan (zhiwenfan@tamu.edu).</p>
 						<hr/>
 					</section>
 			</div>
+
+			<div class="lb" id="lb" hidden><div class="in"><video id="lbVid" controls playsinline preload="none"></video><div class="bar"><div id="lbTitle"></div><span>left: RGB input · right: ground truth (top) vs prediction (bottom)</span><button class="x" id="lbClose" title="close">✕</button></div></div></div>
 
 		<!-- Scripts -->
 			<script src="assets/js/jquery.min.js"></script>
@@ -380,6 +355,11 @@
 			const $id = id => document.getElementById(id);
 			// lazy media: src/poster are assigned only when an element comes within 400 px of the viewport; nothing autoplays
 			(function(){const io=new IntersectionObserver(es=>es.forEach(e=>{if(!e.isIntersecting)return;const el=e.target;io.unobserve(el);if(el.dataset.poster)el.poster=el.dataset.poster;if(el.dataset.src)el.src=el.dataset.src;}),{rootMargin:'400px 0px'});document.querySelectorAll('[data-src],[data-poster]').forEach(el=>io.observe(el));})();
+			// human prediction clips: poster cards open the clip in a lightbox (the clip is loaded only then)
+			(function(){const lb=$id('lb'),lv=$id('lbVid');
+			 function close(){lb.hidden=true;lv.pause();lv.removeAttribute('src');lv.load();document.body.style.overflow='';}
+			 document.querySelectorAll('.pv').forEach(a=>a.onclick=e=>{e.preventDefault();lv.src=a.dataset.video;lv.poster=a.dataset.poster;$id('lbTitle').textContent=a.dataset.title;lb.hidden=false;document.body.style.overflow='hidden';lv.play().catch(()=>{});});
+			 $id('lbClose').onclick=close;lb.addEventListener('click',e=>{if(e.target===lb)close();});document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!lb.hidden)close();});})();
 			// sim prediction viewer (built when scrolled near)
 			(function(){
 			 const S={task:null,fi:0,hand:'both',rep:'both'};let built=false;

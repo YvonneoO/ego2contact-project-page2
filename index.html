@@ -379,7 +379,6 @@
 			 const pad=n=>String(n).padStart(3,'0');
 			 const cur=()=>SIM.sequences.find(s=>s.task===S.task);
 			 const LN=n=>n.replace('distal',' distal').replace('middle',' middle').replace('proximal',' proximal').replace('lfmetacarpal','lf metacarpal');
-			 const SPLIT={val:'held-out validation episode',unseen:'episode not in fine-tune data',train:'fine-tune training episode'};
 			 function setSeg(id,v){[...$id(id).children].forEach(b=>b.classList.toggle('on',b.dataset.v===v));}
 			 function best(s){let b=0,bv=-1;s.frames.forEach((f,i)=>{let t=0;for(const h of s.hands){const g=s.links[String(f)][h].GT;for(const k in g)t+=g[k];}if(t>bv){bv=t;b=i;}});return b;}
 			 function build(){built=true;const s=cur();
@@ -390,8 +389,8 @@
 			  $id('simThumbs').innerHTML=s.frames.map((f,i)=>`<button data-i="${i}" class="${i===S.fi?'on':''}"><img src="${s.img['rgb_'+pad(f)]}"><span>${f}</span></button>`).join('');
 			  render();}
 			 function render(){if(!built)return;const s=cur(),f=s.frames[S.fi];
-			  $id('simLab').textContent=`frame ${f} (${S.fi+1}/${s.frames.length}) of ${s.T}`;
-			  $id('simMeta').textContent=`${s.episode.replace('episode_','episode ')} · ${SPLIT[s.split]||''}`;
+			  $id('simLab').textContent=`frame ${f} of ${s.T}`;
+			  $id('simMeta').textContent='held-out validation episode';
 			  $id('simRgb').src=s.img['rgb_'+pad(f)];
 			  [...$id('simThumbs').children].forEach((b,i)=>b.classList.toggle('on',i===S.fi));
 			  const hands=S.hand==='both'?s.hands:[S.hand];const reps=S.rep==='both'?['grid','hand']:[S.rep];let h='';

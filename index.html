@@ -187,11 +187,11 @@
 							<div class="vhands" id="simPanels"></div>
 						</div>
 						<p>
-						<b>Ablation of the anatomical correspondence.</b> All variants fine-tune the same human-pretrained predictor on the simulated Shadow hand and differ only in how the 17 link forces are mapped to the grid; the last row replaces the grid with a head that outputs the 17 link forces directly. Metrics are computed on per-link net forces against the same link-level ground truth.
+						<b>Ablation of the anatomical correspondence.</b> All variants fine-tune the same human-pretrained predictor on the simulated Shadow hand and differ only in how the 17 link forces are mapped to the grid; the last row replaces the grid with a head that outputs the 17 link forces directly. Metrics are computed on the per-link net forces, i.e. the predicted and ground-truth pressure summed within each link.
 						</p>
-						<div class="table-wrapper"><table><thead><tr><th>Correspondence</th><th>C.IoU ↑</th><th>V.IoU ↑</th><th>MAE ↓</th></tr></thead><tbody><tr><td>6 regions (per finger)</td><td>0.2037</td><td>0.1911</td><td>0.0208</td></tr><tr><td>12 regions (tip / rest of finger)</td><td>0.4504</td><td>0.3905</td><td>0.0138</td></tr><tr><td>16 regions, uniform</td><td>0.5355</td><td>0.4583</td><td>0.0117</td></tr><tr><td><b>16 regions, Gaussian (ours)</b></td><td><b>0.5554</b></td><td><b>0.4842</b></td><td><b>0.0114</b></td></tr><tr><td>Direct 17-link head (no grid)</td><td>0.5504</td><td>0.4777</td><td>0.0117</td></tr></tbody></table></div>
+						<div class="table-wrapper"><table><thead><tr><th>Correspondence</th><th>Force C.IoU ↑</th><th>Force V.IoU ↑</th><th>Force MAE ↓</th></tr></thead><tbody><tr><td>6 regions (per finger)</td><td>0.2037</td><td>0.1911</td><td>0.0208</td></tr><tr><td>12 regions (tip / rest)</td><td>0.4504</td><td>0.3905</td><td>0.0138</td></tr><tr><td>16 regions, uniform</td><td>0.5355</td><td>0.4583</td><td>0.0117</td></tr><tr><td><b>16 regions, Gaussian (ours)</b></td><td><b>0.5554</b></td><td><b>0.4842</b></td><td><b>0.0114</b></td></tr><tr><td>Direct 17-link head (no grid)</td><td>0.5504</td><td>0.4777</td><td>0.0117</td></tr></tbody></table></div>
 						<p>
-						Coarser regions merge the forces of different links and lose link-level contact, and spreading each force around its contact point beats spreading it uniformly. The direct 17-link head is no better than the shared grid, which keeps one output space for human data, the simulated hand and the real glove.
+						Coarser correspondences merge the forces of different links, and spreading each force around its contact point beats spreading it uniformly. With this contact-centred Gaussian mapping, the shared grid is on par with a direct 17-link head while keeping one representation for human, simulated and real hands.
 						</p>
 
 						<hr style="margin-top: 0em;">
@@ -241,7 +241,7 @@
 
 						<h3><a id="real">Real-Robot Experiments</a></h3>
 						<p>
-						Dexterous hands wearing 880-taxel tactile gloves on a dual-arm platform, used for single-arm and bimanual tasks, with a head camera and wrist cameras. Demonstrations are collected by VR teleoperation; the adapted predictor annotates them with tactile images for post-training a vision-language-action policy.
+						Dexterous hands wearing 880-taxel tactile gloves on a dual-arm platform, used for single-arm and bimanual tasks, with a head camera and wrist cameras. Demonstrations are collected by VR teleoperation; the adapted predictor annotates them with tactile images for post-training a vision-tactile-language-action (VTLA) policy.
 						<br>Post-training uses no tactile, predicted tactile (ours) or measured tactile; every policy runs with the glove's measured tactile. The clips are rollouts of the policies post-trained with predicted tactile (head camera, wrist camera inset). Press ⤢ on a clip to enlarge it.
 						</p>
 						<div class="box alt" style="margin-bottom: 1em;">
